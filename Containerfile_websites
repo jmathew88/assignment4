@@ -1,0 +1,12 @@
+FROM fedora:latest AS baseline
+RUN dnf install -y httpd 
+EXPOSE 80
+ENTRYPOINT httpd -D FOREGROUND 
+
+FROM baseline
+COPY website1.html /var/www/html/ 
+LABEL website=1
+
+FROM baseline
+COPY website2.html /var/www/html/ 
+LABEL website=2
